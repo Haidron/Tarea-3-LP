@@ -52,7 +52,7 @@ public class Jugador{
     public void mostrarEnergia(){
         System.out.println("-----------------------------");
         System.out.println("Energia del traje de proteccion restante: " + getEnergiaProteccion());
-        System.out.println("Eficiencia actual del traje: " + getEficienciaProteccion());
+        System.out.println("Eficiencia actual del traje: " + (int)(getEficienciaProteccion()*100.0f) + "%");
         System.out.println("-----------------------------");
     }
 

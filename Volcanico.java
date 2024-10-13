@@ -16,8 +16,8 @@ public class Volcanico extends Planeta {
 
         double area = 4 * Math.PI * Math.pow(getRadio(), 2);
         int cristales = (int)(factorHidrogeno * area);
-        double consumoEnergia = factorConsumo * (temperatura);
         temperatura = rand(120, 256);
+        double consumoEnergia = factorConsumo * (temperatura);
         int platino = (int)((factorPlatino * area) - 20.5 * Math.pow(temperatura, 2));
 
         setHidrogeno(cristales);

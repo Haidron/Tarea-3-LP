@@ -6,13 +6,17 @@ public class MapaGalactico{
 
     private List<Planeta> planetas;
     private int posicion;
+    private boolean centroGenerado = false;
     private Random random = new Random();
+
 
     public MapaGalactico(){
         this.planetas = new ArrayList<>();
         this.posicion = 0;
         generadorPlaneta();
     }
+
+
 
     public void generadorPlaneta(){
         int probabilidad = rand(1, 100);
@@ -31,7 +35,15 @@ public class MapaGalactico{
             nuevoPlaneta = new Volcanico(rand(1000, 100000));
         }
         else{
-            nuevoPlaneta = null; //esto hay que cambiarlo
+            if(!centroGenerado){
+                nuevoPlaneta = new CentroGalactico(); 
+                centroGenerado = true;
+            }
+            else{
+                generadorPlaneta();
+                return;
+                
+            }
         }
 
         planetas.add(nuevoPlaneta);

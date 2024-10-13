@@ -135,14 +135,14 @@ public abstract class Planeta implements tieneAsentamientos {
 
     public boolean visitar(Jugador jugador){
 
-        System.out.println("Recursos disponibles en el planeta: ");
+        System.out.println("\nRecursos disponibles en el planeta: ");
         System.out.println("1. Cristales de hidrogeno: " + this.getHidrogeno());
         System.out.println("2. Flores de sodio: " + this.getSodio());
         System.out.println("3. Uranio: " + this.getUranio());
         System.out.println("4. Platino: " + this.getPlatino());
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el numero de recurso que quiere: ");
+        System.out.println("\nIngrese el numero de recurso que quiere: ");
 
         int eleccion = scanner.nextInt();
         int cantidad = 0;

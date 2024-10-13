@@ -37,18 +37,26 @@ public class Juego {
                                 mapa.generadorPlaneta();
                             }
                         }
-                    
-                    case 2:
-                        if(!mapa.getPlaneta().visitar(jugador)){
-                            break;
-                        }
+                        jugador.getNave().viajarPlaneta(mapa, direccion, salto);
 
-                    case 3:
+                        if(jugador.getNave().getCombustible() <= 0){
+                            System.out.println("Te has quedado sin combustible en la nave, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            perder();
+                        }
+                        break;
+                    
+                    
+                    case 2: 
+                        mapa.getPlaneta().visitar(jugador);
+                        break;
+                    
+
+                    case 3: 
                         jugador.getInventario().mostrarInventario();
                         break;
                     
 
-                    case 4:
+                    case 4: 
                         System.out.println("\n1. Recargar energia de proteccion");
                         System.out.println("2. Recargar combustible de la nave");
                         System.out.println("Su eleccion: ");
@@ -82,6 +90,8 @@ public class Juego {
                                     System.out.println("Propulsores recargados con exito");
                                 }
                                 break;
+                        }
+                        break;
 
                     case 5:
 
@@ -124,19 +134,14 @@ public class Juego {
 
                     case 2:
 
-                        if(mapa.getPlaneta().visitar(jugador)){
-                            break;
+                        if(!mapa.getPlaneta().visitar(jugador)){
+                            System.out.println("Te has quedado sin energia de proteccion, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            perder();
                         }
-                        else{
-                            System.out.println("Te has quedado sin energia de proteccion");
-                            break;
-                        }
-                        
+                        break;
                             
-                        
-
                     case 3:
-
+                        System.out.println("\nVisitando asentamientos en el planeta helado...");
                         mapa.getPlaneta().visitarAsentamientos(jugador);
                         break;
 
@@ -181,6 +186,7 @@ public class Juego {
                                 }
                                 break;
                         }
+                        break;
 
                     case 6:
 
@@ -193,31 +199,37 @@ public class Juego {
                 }
             }
         }
-
-        System.out.println("Gracias por jugar. ¡Hasta la próxima!");
+        System.out.println("\nGracias por jugar. ¡Hasta la próxima!");
     }
+
+        
 
     // Muestra el menú principal de opciones
     private void mostrarMenu() {
         System.out.println("\n--- Menú de Juego ---");
         if(mapa.getPlaneta() instanceof CentroGalactico){
             System.out.println("\nEstas en la orbita del Centro Galactico, en la posicion " + (mapa.getPosicion() + 1));
+            jugador.getNave().mostrarDatos();
+            jugador.mostrarEnergia();
             System.out.println("1. Viajar a otro planeta");
             System.out.println("2. Entrar al Centro Galactico (Necesitas minimo un 50% de eficiencia)");  
             System.out.println("3. Ver inventario");
             System.out.println("4. Recargar energia o combustible");
             System.out.println("5. Salir del juego");
+            System.out.println("Seleccione una opcion: ");
         }
-        System.out.println("\nActualmente estas en la orbita del planeta numero " + (mapa.getPosicion() + 1) + ", un planeta " + mapa.getPlaneta());
-        jugador.getNave().mostrarDatos();
-        jugador.mostrarEnergia();
-        System.out.println("1. Viajar a otro planeta");
-        System.out.println("2. Extraer recursos");
-        System.out.println("3. Comerciar con los asentamientos");
-        System.out.println("4. Ver inventario");
-        System.out.println("5. Recargar energia o combustible");
-        System.out.println("6. Salir del juego");
-        System.out.print("Seleccione una opción: ");
+        else{
+            System.out.println("\nActualmente estas en la orbita del planeta numero " + (mapa.getPosicion() + 1) + ", un planeta " + mapa.getPlaneta());
+            jugador.getNave().mostrarDatos();
+            jugador.mostrarEnergia();
+            System.out.println("1. Viajar a otro planeta");
+            System.out.println("2. Extraer recursos");
+            System.out.println("3. Comerciar con los asentamientos");
+            System.out.println("4. Ver inventario");
+            System.out.println("5. Recargar energia o combustible");
+            System.out.println("6. Salir del juego");
+            System.out.print("Seleccione una opción: ");
+        }
     }
 
     private void perder(){
@@ -234,5 +246,6 @@ public class Juego {
         jugador.setEnergiaProteccion(100.0f);
         jugador.setCapacidadEnergia(100.0f);
         jugador.setEficienciaProteccion(0.0f);
+    
     }
 }

@@ -40,7 +40,7 @@ public class Nave{
     public void mostrarDatos(){
         System.out.println("------------------------------------");
         System.out.println("Combustible restante en la nave: " + getCombustible());
-        System.out.println("Eficiencia actual de la nave: " + getEficienciaPropulsor());
+        System.out.println("Eficiencia actual de la nave: " + (int)(getEficienciaPropulsor()*100) + "%");
     }
 
     public void recargarPropulsores(int hidrogeno){
