@@ -50,7 +50,8 @@ public class Juego {
                     break;
 
                 case 3:
-                    //comercio
+
+                    mapa.getPlaneta().visitarAsentamientos(jugador);
                     break;
 
                 case 4:
@@ -79,7 +80,7 @@ public class Juego {
     // Muestra el menú principal de opciones
     private void mostrarMenu() {
         System.out.println("\n--- Menú de Juego ---");
-        System.out.println("\nActualmente estas en la orbita de un planeta " + mapa.getPlaneta());
+        System.out.println("\nActualmente estas en la orbita del planeta numero " + (mapa.getPosicion() + 1) + ", un planeta " + mapa.getPlaneta());
         jugador.getNave().mostrarDatos();
         jugador.mostrarEnergia();
         System.out.println("1. Viajar a otro planeta");

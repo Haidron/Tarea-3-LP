@@ -2,6 +2,7 @@ public class Jugador{
 
     private float unidadesEnergiaProteccion;
     private float eficienciaEnergiaProteccion; 
+    private float capacidadEnergia;
     private static float factorRecargaJugador = 0.65f;
     private static float factorConsumo = 0.5f; 
     
@@ -11,16 +12,21 @@ public class Jugador{
     public Jugador(){
         this.unidadesEnergiaProteccion = 100.0f;
         this.eficienciaEnergiaProteccion = 0.0f;
+        this.capacidadEnergia = 100.0f;
         this.nave = new Nave();
         this.inventario = new Inventario();
     }
 
-    private void setEnergiaProteccion(float unidadesEnergiaProteccion){
+    public void setEnergiaProteccion(float unidadesEnergiaProteccion){
         this.unidadesEnergiaProteccion = unidadesEnergiaProteccion;
     }
 
-    private void setEficienciaProteccion(float eficienciaEnergiaProteccion){
+    public void setEficienciaProteccion(float eficienciaEnergiaProteccion){
         this.eficienciaEnergiaProteccion = eficienciaEnergiaProteccion;
+    }
+
+    public void setCapacidadEnergia(float capacidadEnergia){
+        this.capacidadEnergia = capacidadEnergia;
     }
 
     public float getEnergiaProteccion(){
@@ -29,6 +35,10 @@ public class Jugador{
 
     public float getEficienciaProteccion(){
         return eficienciaEnergiaProteccion;
+    }
+
+    public float getCapacidadEnergia(){
+        return capacidadEnergia;
     }
 
     public Nave getNave(){
@@ -48,12 +58,26 @@ public class Jugador{
 
     public void recargarEnergiaProteccion(int sodio){
         float unidadesRecargadas = factorRecargaJugador * sodio * (1 + getEficienciaProteccion());
-        setEnergiaProteccion(unidadesRecargadas);
+
+        if(unidadesRecargadas >= capacidadEnergia){
+            setEnergiaProteccion(capacidadEnergia);
+        }
+        else{
+            setEnergiaProteccion(unidadesRecargadas);
+        }
+        
     }
 
     public void consumirEnergiaProteccion(int cantidadRecurso, double consumoEnergia){
         float unidadesConsumidas = factorConsumo * cantidadRecurso * (float)(consumoEnergia/100) * (1 - eficienciaEnergiaProteccion);
-        setEnergiaProteccion(getEnergiaProteccion() - unidadesConsumidas);
+
+        if(getEnergiaProteccion() <= unidadesConsumidas){
+            setEnergiaProteccion(0);
+            
+        }
+        else{
+            setEnergiaProteccion(getEnergiaProteccion() - unidadesConsumidas);
+        }
     }
 }
 

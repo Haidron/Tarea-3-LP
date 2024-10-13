@@ -1,12 +1,15 @@
 import java.util.Random;
+import java.util.Scanner;
 
-public class Helado extends Planeta {
+public class Helado extends Planeta{
     
     private static double factorHidrogeno = 0.65;
     private static double factorSodio = 0.35;
     private static double factorConsumo = 0.15; 
-
+    
     private int temperatura;
+
+    private Scanner scanner;
 
     public Helado(int radio) {
         super(radio);

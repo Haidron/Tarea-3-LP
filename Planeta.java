@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public abstract class Planeta {
+public abstract class Planeta implements tieneAsentamientos {
     private int radio;
     private int cristalesHidrogeno;
     private int floresDeSodio;
@@ -174,6 +174,10 @@ public abstract class Planeta {
             else{
                 return false;
             }
+    }
+
+    public String toString(){
+        return this.getClass().getSimpleName();
     }
 }
 
