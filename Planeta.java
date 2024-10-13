@@ -60,6 +60,9 @@ public abstract class Planeta implements tieneAsentamientos {
         return this.consumo;
     }
 
+    public boolean salir(){
+        return true;
+    }
 
     public int extraerRecursos(Jugador jugador, int tipo, int cantidad){
 
