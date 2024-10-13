@@ -15,7 +15,7 @@ public class Radiactivo extends Planeta {
     protected void generarRecursos(){
 
         double area = 4 * Math.PI * Math.pow(getRadio(), 2);
-        int cristales = (int)(factorHidrogeno * area);
+        int cristales = 0; //(int)(factorHidrogeno * area);
         int flores = (int)(factorSodio * area);
         radiacion = rand(10, 50);
         int uranio = (int)(factorUranio * area * radiacion);
@@ -28,6 +28,10 @@ public class Radiactivo extends Planeta {
         setUranio(uranio);
         
         
+    }
+    @Override
+    public void visitarAsentamientos(Jugador jugador){
+        System.out.println("\nNo se han avistado asentamientos");
     }
 
     public int getRadiacion(){

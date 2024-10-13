@@ -73,44 +73,36 @@ public abstract class Planeta implements tieneAsentamientos {
         if(tipo == 1){ //tipo == 1: hidrogeno
             if(cantidad > hidrogenoRestante){
                 System.out.println("No hay suficientes cristales de hidrogeno en el planeta");
-                return 0;
+                return 1;
             } 
             else{
                 this.setHidrogeno(hidrogenoRestante - cantidad);
                 jugador.consumirEnergiaProteccion(cantidad, consumo);
-                jugador.getInventario().setHidrogeno(jugador.getInventario().getHidrogeno() + cantidad);
-                System.out.println("Se ha extraido el hidrogeno con exito");
-                
-                return 1;
-
+                jugador.getInventario().setHidrogeno(jugador.getInventario().getHidrogeno() + cantidad);  
             }  
         }
 
         else if(tipo == 2){ //tipo == 2 sodio
             if(cantidad > sodioRestante){
                 System.out.println("No hay suficientes flores de sodio en el planeta");
-                return 0;
+                return 1;
             } 
             else{
                 this.setSodio(sodioRestante - cantidad);
                 jugador.consumirEnergiaProteccion(cantidad, consumo);
                 jugador.getInventario().setSodio(jugador.getInventario().getSodio() + cantidad);
-                System.out.println("Se ha extraido el sodio con exito");
-                return 1;
             } 
         }
 
         else if(tipo == 3){ //tipo == 3: Uranio
             if(cantidad > uranioRestante){
                 System.out.println("No hay suficiente uranio en el planeta");
-                return 0;
+                return 1;
             } 
             else{
                 this.setUranio(uranioRestante - cantidad);
                 jugador.consumirEnergiaProteccion(cantidad, consumo);
                 jugador.getInventario().setUranio(jugador.getInventario().getHidrogeno() + cantidad);
-                System.out.println("Se ha extraido el uranio con exito");
-                return 1;
 
             }
         }
@@ -118,21 +110,26 @@ public abstract class Planeta implements tieneAsentamientos {
         else if(tipo == 4){ //tipo == 4: Platino
             if(cantidad > platinoRestante){
                 System.out.println("No hay suficiente platino en el planeta");
-                return 0;
+                return 1;
             } 
             else{
                 this.setPlatino(platinoRestante - cantidad);
                 jugador.consumirEnergiaProteccion(cantidad, consumo);
                 jugador.getInventario().setPlatino(jugador.getInventario().getHidrogeno() + cantidad);
-                System.out.println("Se ha extraido el uranio con exito");
-                return 1;
 
             }  
         }
 
         else{
             System.out.println("Tipo invalido");
+            return 1;
+        }
+
+        if(jugador.getEnergiaProteccion() <= 0){
             return 0;
+        }
+        else{
+            return 1;
         }
     }
 
@@ -168,12 +165,12 @@ public abstract class Planeta implements tieneAsentamientos {
             cantidad = scanner.nextInt();
         }
 
-        if(extraerRecursos(jugador, eleccion, cantidad) == 1 ){
-                return true;
-            }
-            else{
-                return false;
-            }
+        if(extraerRecursos(jugador, eleccion, cantidad) == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public String toString(){

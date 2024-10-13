@@ -15,7 +15,7 @@ public interface tieneAsentamientos{
             System.out.println("3. +100 capacidad de combustible en la nave: 250.000.000 Platino");
             System.out.println("4. +100 capacidad de energia de proteccion: 250.000.000 Uranio");
             System.out.println("5. Salir del asentamiento");
-            
+            System.out.println("Su eleccion: ");
             int opcion = scanner.nextInt();
 
             switch (opcion) {

@@ -18,59 +18,179 @@ public class Juego {
 
         while (jugando) {
             mostrarMenu();
-
             int opcion = scanner.nextInt();
+            if(mapa.getPlaneta() instanceof CentroGalactico){
+                switch (opcion) {
+                    case 1:
 
-            switch (opcion) {
+                        System.out.println("Ingrese direccion de salto (-1 hacia la izquieda, 1 hacia la derecha): ");
+                        int direccion = scanner.nextInt();
+                        System.out.println("Ingrese tamano del salto: ");
+                        int salto = scanner.nextInt();
 
-                case 1:
+                        int nuevaPos = mapa.getPosicion() + (direccion * salto);
 
-                    System.out.println("Ingrese direccion de salto (-1 hacia la izquieda, 1 hacia la derecha): ");
-                    int direccion = scanner.nextInt();
-                    System.out.println("Ingrese tamano del salto: ");
-                    int salto = scanner.nextInt();
+                        if(nuevaPos >= mapa.getTamanoPlanetas()){
+                            int diferencia = nuevaPos - mapa.getTamanoPlanetas() + 1;
 
-                    int nuevaPos = mapa.getPosicion() + (direccion * salto);
-
-                    if(nuevaPos >= mapa.getTamanoPlanetas()){
-                        int diferencia = nuevaPos - mapa.getTamanoPlanetas() + 1;
-
-                        for(int i = 0 ; i < diferencia ; i++){
-                            mapa.generadorPlaneta();
+                            for(int i = 0 ; i < diferencia ; i++){
+                                mapa.generadorPlaneta();
+                            }
                         }
-                    }
+                    
+                    case 2:
+                        if(!mapa.getPlaneta().visitar(jugador)){
+                            break;
+                        }
 
-                    jugador.getNave().viajarPlaneta(mapa, direccion, salto);
+                    case 3:
+                        jugador.getInventario().mostrarInventario();
+                        break;
+                    
 
-                    break;
+                    case 4:
+                        System.out.println("\n1. Recargar energia de proteccion");
+                        System.out.println("2. Recargar combustible de la nave");
+                        System.out.println("Su eleccion: ");
+                        int recarga = scanner.nextInt();
+                        int sodio;
+                        int hidrogeno;
+                        switch (recarga){
 
-                case 2:
+                            case 1:
+                                System.out.println("\nIngrese la cantidad de sodio que se usara para recargar: ");
+                                sodio = scanner.nextInt();
+                                if(sodio > jugador.getInventario().getSodio()){
+                                    System.out.println("\nSodio insuficiente");
+                                }
+                                else{
+                                    jugador.recargarEnergiaProteccion(sodio);
+                                    jugador.getInventario().setSodio(jugador.getInventario().getSodio() - sodio); 
+                                    System.out.println("Traje de proteccion recargado con exito"); 
+                                }
+                                break;
 
-                    mapa.getPlaneta().visitar(jugador);
-                    break;
+                            case 2:
+                                System.out.println("\nIngrese la cantidad de hidrogeno que se usara para recargar: ");
+                                hidrogeno = scanner.nextInt();
+                                if(hidrogeno > jugador.getInventario().getHidrogeno()){
+                                    System.out.println("\nHidrogeno insuficiente");
+                                }
+                                else{
+                                    jugador.getNave().recargarPropulsores(hidrogeno);
+                                    jugador.getInventario().setHidrogeno(jugador.getInventario().getHidrogeno() - hidrogeno);
+                                    System.out.println("Propulsores recargados con exito");
+                                }
+                                break;
 
-                case 3:
+                    case 5:
 
-                    mapa.getPlaneta().visitarAsentamientos(jugador);
-                    break;
-
-                case 4:
-
-                    jugador.getInventario().mostrarInventario();
-                    break;
-
-                case 5:
-
-                    jugando = false; // Salir del juego
-                    break;
-
-                default:
-                    System.out.println("Opción inválida. Intente de nuevo.");
+                        jugando = false; 
+                        break;
+                    
+                    default:
+                        System.out.println("Opción inválida. Intente de nuevo.");
+                        break;
+                }
             }
+            else{
+                switch (opcion) {
 
-            if (jugador.getEnergiaProteccion() <= 0) {
-                System.out.println("¡Te has quedado sin energía! Fin del juego.");
-                jugando = false;
+                    case 1:
+
+                        System.out.println("Ingrese direccion de salto (-1 hacia la izquieda, 1 hacia la derecha): ");
+                        int direccion = scanner.nextInt();
+                        System.out.println("Ingrese tamano del salto: ");
+                        int salto = scanner.nextInt();
+
+                        int nuevaPos = mapa.getPosicion() + (direccion * salto);
+
+                        if(nuevaPos >= mapa.getTamanoPlanetas()){
+                            int diferencia = nuevaPos - mapa.getTamanoPlanetas() + 1;
+
+                            for(int i = 0 ; i < diferencia ; i++){
+                                mapa.generadorPlaneta();
+                            }
+                        }
+
+                        jugador.getNave().viajarPlaneta(mapa, direccion, salto);
+
+                        if(jugador.getNave().getCombustible() <= 0){
+                            System.out.println("Te has quedado sin combustible en la nave, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            perder();
+                        }
+
+                        break;
+
+                    case 2:
+
+                        if(mapa.getPlaneta().visitar(jugador)){
+                            break;
+                        }
+                        else{
+                            System.out.println("Te has quedado sin energia de proteccion");
+                            break;
+                        }
+                        
+                            
+                        
+
+                    case 3:
+
+                        mapa.getPlaneta().visitarAsentamientos(jugador);
+                        break;
+
+                    case 4:
+
+                        jugador.getInventario().mostrarInventario();
+                        break;
+
+                    case 5:
+                        
+                        System.out.println("\n1. Recargar energia de proteccion");
+                        System.out.println("2. Recargar combustible de la nave");
+                        System.out.println("Su eleccion: ");
+                        int recarga = scanner.nextInt();
+                        int sodio;
+                        int hidrogeno;
+                        switch (recarga){
+
+                            case 1:
+                                System.out.println("\nIngrese la cantidad de sodio que se usara para recargar: ");
+                                sodio = scanner.nextInt();
+                                if(sodio > jugador.getInventario().getSodio()){
+                                    System.out.println("\nSodio insuficiente");
+                                }
+                                else{
+                                    jugador.recargarEnergiaProteccion(sodio);
+                                    jugador.getInventario().setSodio(jugador.getInventario().getSodio() - sodio); 
+                                    System.out.println("Traje de proteccion recargado con exito"); 
+                                }
+                                break;
+
+                            case 2:
+                                System.out.println("\nIngrese la cantidad de hidrogeno que se usara para recargar: ");
+                                hidrogeno = scanner.nextInt();
+                                if(hidrogeno > jugador.getInventario().getHidrogeno()){
+                                    System.out.println("\nHidrogeno insuficiente");
+                                }
+                                else{
+                                    jugador.getNave().recargarPropulsores(hidrogeno);
+                                    jugador.getInventario().setHidrogeno(jugador.getInventario().getHidrogeno() - hidrogeno);
+                                    System.out.println("Propulsores recargados con exito");
+                                }
+                                break;
+                        }
+
+                    case 6:
+
+                        jugando = false; 
+                        break;
+
+                    default:
+                        System.out.println("Opción inválida. Intente de nuevo.");
+                        break;
+                }
             }
         }
 
@@ -80,6 +200,14 @@ public class Juego {
     // Muestra el menú principal de opciones
     private void mostrarMenu() {
         System.out.println("\n--- Menú de Juego ---");
+        if(mapa.getPlaneta() instanceof CentroGalactico){
+            System.out.println("\nEstas en la orbita del Centro Galactico, en la posicion " + (mapa.getPosicion() + 1));
+            System.out.println("1. Viajar a otro planeta");
+            System.out.println("2. Entrar al Centro Galactico (Necesitas minimo un 50% de eficiencia)");  
+            System.out.println("3. Ver inventario");
+            System.out.println("4. Recargar energia o combustible");
+            System.out.println("5. Salir del juego");
+        }
         System.out.println("\nActualmente estas en la orbita del planeta numero " + (mapa.getPosicion() + 1) + ", un planeta " + mapa.getPlaneta());
         jugador.getNave().mostrarDatos();
         jugador.mostrarEnergia();
@@ -87,7 +215,24 @@ public class Juego {
         System.out.println("2. Extraer recursos");
         System.out.println("3. Comerciar con los asentamientos");
         System.out.println("4. Ver inventario");
-        System.out.println("5. Salir del juego");
+        System.out.println("5. Recargar energia o combustible");
+        System.out.println("6. Salir del juego");
         System.out.print("Seleccione una opción: ");
+    }
+
+    private void perder(){
+
+        int distancia = mapa.getPosicion();
+        jugador.getNave().viajarPlaneta(mapa, -1 , distancia);
+        jugador.getInventario().setHidrogeno(0);
+        jugador.getInventario().setSodio(0);
+        jugador.getInventario().setUranio(0);
+        jugador.getInventario().setPlatino(0);
+        jugador.getNave().setCombustible(100.0f);
+        jugador.getNave().setCapacidadCombustible(100.0f);
+        jugador.getNave().setEficienciaPropulsor(0.0f);
+        jugador.setEnergiaProteccion(100.0f);
+        jugador.setCapacidadEnergia(100.0f);
+        jugador.setEficienciaProteccion(0.0f);
     }
 }
