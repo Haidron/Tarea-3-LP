@@ -24,6 +24,13 @@ public class CentroGalactico extends Planeta{
         }
     }
 
+
+    //el juego nunca va a acceder a visitarAsentamientos() desde el Centro Galactico
+    @Override
+    public void visitarAsentamientos(Jugador jugador){
+        return;
+    }
+
     
 
 

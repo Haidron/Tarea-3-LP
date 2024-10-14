@@ -28,6 +28,11 @@ public class Volcanico extends Planeta {
 
     }
 
+    @Override
+    public void visitarAsentamientos(Jugador jugador){
+        System.out.println("\nNo se han avistado asentamientos");
+    }
+
     public int getTemperatura(){
         return temperatura;
     }

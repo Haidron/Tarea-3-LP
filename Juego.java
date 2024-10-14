@@ -141,7 +141,7 @@ public class Juego {
                         break;
                             
                     case 3:
-                        System.out.println("\nVisitando asentamientos en el planeta helado...");
+                        System.out.println("\nVisitando asentamientos...");
                         mapa.getPlaneta().visitarAsentamientos(jugador);
                         break;
 
