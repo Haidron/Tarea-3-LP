@@ -94,7 +94,7 @@ public class Helado extends Planeta{
 
                     else{
                         jugador.setCapacidadEnergia(jugador.getCapacidadEnergia() + 100.0f);
-                        jugador.getInventario().setUranio(jugador.getInventario().getUranio() - 250);
+                        jugador.getInventario().setUranio(jugador.getInventario().getUranio() - 2500);
                         System.out.println("\nIntercambio exitoso");
                         break;
                     }

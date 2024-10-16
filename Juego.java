@@ -40,7 +40,7 @@ public class Juego {
                         jugador.getNave().viajarPlaneta(mapa, direccion, salto);
 
                         if(jugador.getNave().getCombustible() <= 0){
-                            System.out.println("Te has quedado sin combustible en la nave, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            System.out.println("\nTe has quedado sin combustible en la nave, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
                             perder();
                         }
                         break;

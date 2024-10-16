@@ -105,7 +105,7 @@ public abstract class Planeta implements tieneAsentamientos {
             else{
                 this.setUranio(uranioRestante - cantidad);
                 jugador.consumirEnergiaProteccion(cantidad, consumo);
-                jugador.getInventario().setUranio(jugador.getInventario().getHidrogeno() + cantidad);
+                jugador.getInventario().setUranio(jugador.getInventario().getUranio() + cantidad);
 
             }
         }
@@ -118,7 +118,7 @@ public abstract class Planeta implements tieneAsentamientos {
             else{
                 this.setPlatino(platinoRestante - cantidad);
                 jugador.consumirEnergiaProteccion(cantidad, consumo);
-                jugador.getInventario().setPlatino(jugador.getInventario().getHidrogeno() + cantidad);
+                jugador.getInventario().setPlatino(jugador.getInventario().getPlatino() + cantidad);
 
             }  
         }
