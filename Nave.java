@@ -46,11 +46,11 @@ public class Nave{
     public void recargarPropulsores(int hidrogeno){
         float unidadesRecargadas = factorRecargaNave * hidrogeno * (1 + eficienciaPropulsor);
 
-        if(unidadesRecargadas >= capacidadCombustible){
+        if(unidadesRecargadas + getCombustible() >= capacidadCombustible){
             setCombustible(capacidadCombustible);
         }
         else{
-            setCombustible(unidadesRecargadas);
+            setCombustible(unidadesRecargadas + getCombustible());
         }
         
     }

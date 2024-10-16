@@ -59,11 +59,11 @@ public class Jugador{
     public void recargarEnergiaProteccion(int sodio){
         float unidadesRecargadas = factorRecargaJugador * sodio * (1 + getEficienciaProteccion());
 
-        if(unidadesRecargadas >= capacidadEnergia){
+        if(unidadesRecargadas + getEnergiaProteccion() >= capacidadEnergia){
             setEnergiaProteccion(capacidadEnergia);
         }
         else{
-            setEnergiaProteccion(unidadesRecargadas);
+            setEnergiaProteccion(unidadesRecargadas + getEnergiaProteccion());
         }
         
     }

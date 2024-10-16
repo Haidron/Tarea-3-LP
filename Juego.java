@@ -126,7 +126,7 @@ public class Juego {
                         jugador.getNave().viajarPlaneta(mapa, direccion, salto);
 
                         if(jugador.getNave().getCombustible() <= 0){
-                            System.out.println("Te has quedado sin combustible en la nave, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            System.out.println("\nTe has quedado sin combustible en la nave, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
                             perder();
                         }
 
@@ -135,7 +135,7 @@ public class Juego {
                     case 2:
 
                         if(!mapa.getPlaneta().visitar(jugador)){
-                            System.out.println("Te has quedado sin energia de proteccion, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            System.out.println("\nTe has quedado sin energia de proteccion, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
                             perder();
                         }
                         break;
@@ -194,7 +194,7 @@ public class Juego {
                         break;
 
                     default:
-                        System.out.println("Opción inválida. Intente de nuevo.");
+                        System.out.println("\nOpción inválida. Intente de nuevo.");
                         break;
                 }
             }
@@ -208,7 +208,7 @@ public class Juego {
     private void mostrarMenu() {
         System.out.println("\n--- Menú de Juego ---");
         if(mapa.getPlaneta() instanceof CentroGalactico){
-            System.out.println("\nEstas en la orbita del Centro Galactico, en la posicion " + (mapa.getPosicion() + 1));
+            System.out.println("\nEstas en la orbita del Centro Galactico, en la posicion " + mapa.getPosicion());
             jugador.getNave().mostrarDatos();
             jugador.mostrarEnergia();
             System.out.println("1. Viajar a otro planeta");
@@ -219,7 +219,7 @@ public class Juego {
             System.out.println("Seleccione una opcion: ");
         }
         else{
-            System.out.println("\nActualmente estas en la orbita del planeta numero " + (mapa.getPosicion() + 1) + ", un planeta " + mapa.getPlaneta());
+            System.out.println("\nActualmente estas en la orbita del planeta numero " + mapa.getPosicion() + ", un planeta " + mapa.getPlaneta());
             jugador.getNave().mostrarDatos();
             jugador.mostrarEnergia();
             System.out.println("1. Viajar a otro planeta");

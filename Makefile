@@ -9,5 +9,3 @@ all:
 run: all
 	java $(MAIN)
 
-clean:
-	rm -f *.class
