@@ -8,10 +8,13 @@ public class Oceanico extends Planeta {
 
     private int profundidad;
 
+    /* Constructor de la subclase Oceanico, inicializa las instancias de Oceanico con el radio introducido. Todos los planetas se generan en la funcion generadorPlaneta() 
+    de la clase MapaGalactico, la logica del radio se hace en dicha funcion*/
     public Oceanico(int radio) {
         super(radio);
     }
 
+    /* Esta funcion se encarga de inicializar todos los recursos disponibles en el planeta, usando las funciones setters definidas */
     @Override
     protected void generarRecursos() {
 
@@ -29,6 +32,8 @@ public class Oceanico extends Planeta {
         
     }
 
+    /* Funcion para comerciar con los asentamientos, muestra al jugador las opciones de mejoras y sus precios, y recibe un numero introducido por el jugador que representa
+    la mejora que quiera comprar, en la misma funcion se hace el descuento de recursos al inventario del jugador y se aplica la mejora al jugador o a la nave */
     @Override
     public void visitarAsentamientos(Jugador jugador) {
 
@@ -104,10 +109,12 @@ public class Oceanico extends Planeta {
         }
     } 
 
+    //Funcion getter retorna el atributo privado profundidad
     public int getProfundidad(){
         return profundidad;
     }
 
+    //Funcion rand() retorna un numero aleatorio entre los parametros a y b
     private int rand(int a, int b) {
         return (int) (Math.random() * (b - a + 1)) + a;
     }

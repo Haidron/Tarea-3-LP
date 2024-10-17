@@ -5,12 +5,18 @@ public class Juego {
     private Jugador jugador;
     private Scanner scanner;
 
+    //Constructor de la clase Juego, crea instancias del mapa galactico, del jugador, y un scanner para recibir entrada del usuario
     public Juego() {
         this.mapa = new MapaGalactico();
         this.jugador = new Jugador();
         this.scanner = new Scanner(System.in);
     }
 
+    /* Funcion principal del juego, esta funcion se encarga de recibir las entradas del jugador y llamar a las funciones correspondientes usando las instancias
+    creadas en el constructor de la clase. La funcion muestra el menu de juego al jugador llamando a mostrarMenu() y luego pide retroalimentacion del jugador,
+    dependiendo del numero introducido, realiza las tareas de viajar a otros planetas, visitar y extraer recursos del planeta actual, comerciar con los asentamientos,
+    mostrar el inventario al usuario, recargar la energia del traje de proteccion o el combustible de la nave, entrar al centro galactico (si es que corresponde), o
+    salir del juego si es que el jugador lo desea */ 
     public void iniciar(){
         System.out.println("¡Bienvenido a No Java's Sky!");
 
@@ -126,7 +132,7 @@ public class Juego {
                         jugador.getNave().viajarPlaneta(mapa, direccion, salto);
 
                         if(jugador.getNave().getCombustible() <= 0){
-                            System.out.println("\nTe has quedado sin combustible en la nave, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            System.out.println("\nTe has quedado sin combustible en la nave, regresando al planeta 0, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
                             perder();
                         }
 
@@ -135,7 +141,7 @@ public class Juego {
                     case 2:
 
                         if(!mapa.getPlaneta().visitar(jugador)){
-                            System.out.println("\nTe has quedado sin energia de proteccion, regresando al planeta 1, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
+                            System.out.println("\nTe has quedado sin energia de proteccion, regresando al planeta 0, perderas tu inventario y mejoras, y se recargaran tu energia y combustible");
                             perder();
                         }
                         break;
@@ -204,7 +210,7 @@ public class Juego {
 
         
 
-    // Muestra el menú principal de opciones
+    // Muestra el menú principal de opciones, cambiando a un menú alternativo si es que el planeta actual es el centro galactico
     private void mostrarMenu() {
         System.out.println("\n--- Menú de Juego ---");
         if(mapa.getPlaneta() instanceof CentroGalactico){
@@ -232,6 +238,9 @@ public class Juego {
         }
     }
 
+
+    /*Esta funcion resetea todos los parametros del jugador, su nave, y su inventario a los valores inciales. Adicionalmente se devuelve al primer
+    planeta generado en el mapa galactico*/
     private void perder(){
 
         int distancia = mapa.getPosicion();
